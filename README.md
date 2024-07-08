@@ -41,6 +41,7 @@ To re-implement our experiments or offline use, pls use read the details below:
 > Create conda env use [env.yaml](./env.yaml)
 
 ```python
+git clone git@github.com:kingstdio/ECRECer.git
 conda env create -f env.yaml
 ```
 
