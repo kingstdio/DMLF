@@ -13,7 +13,7 @@ import os
 
 
 # 1. 定义数据目录
-ROOTDIR= f'/home/shizhenkun/codebase/ECRECer/' #change to your own absolute data dir
+ROOTDIR= f'/hpcfs/fhome/shizhenkun/codebase/ECRECer/' #change to your own absolute data dir
 DATADIR = ROOTDIR +'data/'
 RESULTSDIR = ROOTDIR +'results/'
 MODELDIR = ROOTDIR +'model'

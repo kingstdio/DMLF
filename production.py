@@ -233,7 +233,7 @@ def step_by_step_run(input_fasta, output_tsv, mode='p', topnum=1):
 
         print('step 4: predict EC')
         pred_dmlf = pd.DataFrame(rep32.id.copy())
-        model_ec = load_model(cfg.EC_MODEL,custom_objects={"Attention": Attention}, compile=False)
+        model_ec = load_model(cfg.EC_MODEL, custom_objects={"Attention": Attention}, compile=False)
         predicted = model_ec.predict(np.array(rep32.iloc[:,1:]).reshape(rep32.shape[0],1,-1))
         encoder_t3=joblib.load(cfg.DICT_LABEL_T3)
         pred_dmlf['dmlf_ec']=[','.join(item) for item in (encoder_t3.inverse_transform(bcommon.props_to_onehot(predicted)))]
@@ -309,7 +309,7 @@ if __name__ =='__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', help='input file (fasta format)', type=str, default=cfg.DATADIR + 'sample_10.fasta')
     parser.add_argument('-o', help='output file (tsv table)', type=str, default=cfg.RESULTSDIR + 'sample_10_2023_07_18.tsv')
-    parser.add_argument('-mode', help='compute mode. p: prediction, r: recommendation', type=str, default='r')
+    parser.add_argument('-mode', help='compute mode. p: prediction, r: recommendation, h:hybrid', type=str, default='r')
     parser.add_argument('-topk', help='recommendation records, min=1, max=20', type=int, default='50')
 
     pandarallel.initialize() #init

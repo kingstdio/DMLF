@@ -1,4 +1,3 @@
-import re
 import pandas as pd
 import numpy as np
 import joblib
@@ -233,25 +232,4 @@ if __name__ == '__main__':
     # 5.获取Slice预测结果
     print('step 5. get EC prediction results')
     # 5.1 准备slice所用文件
-    bcommon.prepare_slice_file( x_data=testX, 
-                                y_data=testY['ec_number'], 
-                                x_file=cfg.FILE_SLICE_TESTX,
-                                y_file=cfg.FILE_SLICE_TESTY,
-                                ec_label_dict=dict_ec_label
-                            )
-    # 5.2 获得预测结果
-    # slice_pred_ec = get_slice_res(slice_query_file=cfg.FILE_SLICE_TESTX, model_path= cfg.MODELDIR, dict_ec_label=dict_ec_label, test_set=test,  res_file=cfg.FILE_SLICE_RESULTS)
-    slice_pred_ec = get_slice_res(slice_query_file=cfg.DATADIR+'slice_test_x_esm33.txt', model_path= cfg.MODELDIR+'/slice_esm33', dict_ec_label=dict_ec_label, test_set=test,  res_file=cfg.FILE_SLICE_RESULTS)
-    
-    slice_pred_ec['isEnzyme_pred_xg'] = isEnzyme_pred
-    slice_pred_ec['functionCounts_pred_xg'] = howmany_Enzyme_pred
-    slice_pred_ec = slice_pred_ec.merge(blast_res, on='id', how='left')
-
-    # slice_pred_ec.to_csv(cfg.RESULTSDIR + 'singele_slice.tsv', sep='\t', index=None)
-    # 5.5 获取blast EC预测结果
-
-    # 6.将结果集成输出(slice_pred=slice_pred_ec, dict_ec_transfer=dict_ec_transfer)
-    slice_pred_ec = run_integrage(slice_pred=slice_pred_ec, dict_ec_transfer = dict_ec_transfer)    
-    slice_pred_ec.to_csv(cfg.FILE_INTE_RESULTS, sep='\t', index=None)
-
     print('predict finished')
