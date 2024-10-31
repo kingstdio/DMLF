@@ -37,17 +37,18 @@ docker pull kingstdio/ecrecer
 
 # 2. run ecrecer docker image
 # gpu version:
-docker docker run -it  -p 8888:8888 -p 8822:22 --gpus all --name ecrecer ecrecer:latst /bin/bash
+sudo docker run -it -d --gpus all  --name ecrecer -v ~/:/home/ kingstdio/ecrecer #~/ is your fasta file folder
 # cpu version:
-docker docker run -it  -p 8888:8888 -p 8822:22 --name ecrecer ecrecer:latst /bin/bash
+sudo docker run -it -d --name ecrecer -v ~/:/home/ kingstdio/ecrecer  #~/ is your fasta file folder
 
-# 3. copy fasta file to /data/input/
+# 3. run ECRECer prediction 
 
+sudo docker exec ecrecer python /ecrecer/production.py -i /home/input_fasta_file.fasta -o /home/output_tsv_file.tsv -mode h -topk 10
 
-# 4. run ECRECer
-cd /ECRECer
-python run_ecrecer.py -i /data/input/ -o /data/output/output.tsv -mode [p|r|h] -topk 10
-
+#-topk: top k predicted EC numbers
+#-mode p: prediction mode, predict EC numbers only
+#-mode r: recommendation mode, recommend EC numbers with predicted probabilities, the higher the better
+#-mode h: hybird mode, use prediction, recommendation and sequence alignment methods
 
 ```
 
@@ -55,7 +56,23 @@ python run_ecrecer.py -i /data/input/ -o /data/output/output.tsv -mode [p|r|h] -
 
 ```bash
 # 1. pull ecrecer singularity image
+
+singularity pull library://kingstdio/tib/ecrecer
+
+# 2. run ecrecer singularity image
+# gpu version:
+singularity run --nv ecrecer.sif python /ecrecer/production.py -i input_fasta_file.fasta -o output_tsv_file.tsv -mode h -topk 10
+# cpu version:
+singularity run ecrecer.sif python /ecrecer/production.py -i input_fasta_file.fasta -o output_tsv_file.tsv -mode h -topk 10
+
+#-topk: top k predicted EC numbers
+#-mode p: prediction mode, predict EC numbers only
+#-mode r: recommendation mode, recommend EC numbers with predicted probabilities, the higher the better
+#-mode h: hybird mode, use prediction, recommendation and sequence alignment methods
+
 ```
+
+
 
 
 # To re-implement our experiments or offline use, pls use read the details below:
