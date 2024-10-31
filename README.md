@@ -9,36 +9,6 @@
  * Copyright (c) 2022 by tibd, All Rights Reserved. 
 -->
 
-
-## title {.tabset .tabset-fade}
-content above tabbed region.
-
-### tab Social-Media
-
-tab content Social-Media
-
-### tab Contact
-
-tab content  Contact
-
-### tab Revisions
-
-tab content  Revisions
-
-### tab Articles
-
-tab content  Articles
-
-### tab Skills
-
-tab content  Skills
-
-### tab Insights
-
-tab content  Insights
-
-content below tabbed region
-
 # DMLF: Enzyme Commission Number Predicting and Benchmarking with Multi-agent Dual-core Learning
 
 This repo contains source codes for a EC prediction tool namely ECRECer, which is an implementation  of our paper: 「Enzyme Commission Number Prediction and Benchmarking with Hierarchical Dual-core Multitask Learning Framework」
@@ -51,13 +21,44 @@ Detailed information about the framework can be found in our paper
 2. Zhenkun Shi, Rui Deng, Qianqian Yuan, Zhitao Mao, Ruoyu Wang, Haoran Li, Xiaoping Liao*, Hongwu Ma* (2023). Enzyme Commission Number Prediction and Benchmarking with Hierarchical Dual-core Multitask Learning Framework. Research.
 ```
 
+
+## Usage
+### For simply use our tools to predict EC numbers, please visit ECRECEer websiet at https://ecrecer.biodesign.ac.cn
+
+
+### For users who want to run ECRECer locally, please follow the steps below:
+We provide docker image and singularity image for users to run ECRECer locally.
+
+> <b>Docker image</b>: 
+
 ```bash
+# 1. pull ecrecer docker image
+docker pull kingstdio/ecrecer
+
+# 2. run ecrecer docker image
+# gpu version:
+docker docker run -it  -p 8888:8888 -p 8822:22 --gpus all --name ecrecer ecrecer:latst /bin/bash
+# cpu version:
+docker docker run -it  -p 8888:8888 -p 8822:22 --name ecrecer ecrecer:latst /bin/bash
+
+# 3. copy fasta file to /data/input/
+
+
+# 4. run ECRECer
+cd /ECRECer
+python run_ecrecer.py -i /data/input/ -o /data/output/output.tsv -mode [p|r|h] -topk 10
+
 
 ```
 
-For simply use our tools to predict EC numbers, pls visit our web service at https://ecrecer.biodesign.ac.cn
+> <b>Singularity image</b>: 
 
-To re-implement our experiments or offline use, pls use read the details below:
+```bash
+# 1. pull ecrecer singularity image
+```
+
+
+# To re-implement our experiments or offline use, pls use read the details below:
 
 # Prerequisites
 
