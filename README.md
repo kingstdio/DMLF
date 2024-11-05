@@ -57,7 +57,8 @@ sudo docker exec ecrecer python /ecrecer/production.py -i /home/input_fasta_file
 ```bash
 # 1. pull ecrecer singularity image
 
-singularity pull library://kingstdio/tib/ecrecer
+# Image ~= 11GB, may take a while to download
+wget -c https://tibd-public-datasets.s3.us-east-1.amazonaws.com/ecrecer/sifimages/ecrecer.sif
 
 # 2. run ecrecer singularity image
 # gpu version:
